@@ -1,44 +1,42 @@
-
 <?
-
-//function getUsuPass($request){
-
-  //  $login=new login();
-   // return $login->getUsuPass($request);
-//}
-
-//class login{
-
-  //  private $conexion;
-    
-    //function cxbd(){            
-      //  $database=new DbConnect();
-      //  $this->conexion=$database->connect();
-   // }
-
-    function getUsuPass($request){
-    $usuarios;
-    $response;
-    $usuario=json_decode($request->getBody());
-    $sql = "SELECT * FROM sesion WHERE usuario = :usuario AND clave = :clave";
-    try{   
-        $statement=$this->conexion->prepare($sql);
-            $statement->bindParam("usuario",$usuario->correo);
-            $statement->bindParam("clave",$usuario->pass);
-        $statement->execute();
-        $count=$statement->rowCount();
-        if($count)
-        {
-            $response->mensaje="Datos insertados correctamente :)";
-        }
-        else
-        {
-            $response->mensaje="error revise sus datos";
-        }
-
-          
-    }catch(Exception $e){
-        $response=$e;
+function AccessLogin($request){
+    $login=new Login();
+    return $login->AccessLogin($request);
+}
+class Login{
+    private $conexion;
+    function __construct(){            
+        $database=new DbConnect();
+        $this->conexion=$database->connect();
     }
-    return json_encode($response);
+    function AccessLogin($request){
+        $data=json_decode($request->getbody());
+        $correo = $data->correo;
+        $pass = $data->pass;
+        $response;
+        $sql = "SELECT * FROM usuario WHERE correo = :correo AND pass = :pass";
+        try{   
+            $statement=$this->conexion->prepare($sql);
+            $statement->bindParam(":correo",$correo);
+            $statement->bindParam(":pass",$pass);
+            $statement->execute();
+            $count=$statement->rowCount();
+            if($count)
+            {
+                $response="Datos correctos";
+            }
+            else
+            {
+                $response="Error usuario o contrasena incorrecta";
+            }
+
+              
+        }catch(Exception $e){
+            $response=$e;
+        }
+        return json_encode($response);
+    }
+
+
+    
 }
