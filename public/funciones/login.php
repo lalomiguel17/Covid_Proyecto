@@ -14,11 +14,11 @@ class Login{
         $correo = $data->correo;
         $pass = $data->pass;
         $response;
-        $sql = "SELECT * FROM usuario WHERE correo = :correo AND pass = :pass";
+        $sql = "SELECT * FROM usuarios WHERE usuario = :usuario AND clave = :clave";
         try{   
             $statement=$this->conexion->prepare($sql);
-            $statement->bindParam(":correo",$correo);
-            $statement->bindParam(":pass",$pass);
+            $statement->bindParam(":usuario",$usuario);
+            $statement->bindParam(":clave",$clave);
             $statement->execute();
             $count=$statement->rowCount();
             if($count)
