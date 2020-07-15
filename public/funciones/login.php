@@ -3,7 +3,7 @@ function AccessLogin($request){
     $login=new Login();
     return $login->AccessLogin($request);
 }
-class Login{
+class login{
     private $conexion;
     function __construct(){            
         $database=new DbConnect();
