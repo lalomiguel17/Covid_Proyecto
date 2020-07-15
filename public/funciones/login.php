@@ -1,4 +1,23 @@
+
 <?
+
+function getUsuPass($request){
+
+    $login=new login();
+    return $login->getUsuPass($request);
+}
+
+class login{
+
+    private $conexion;
+    
+    function cxbd(){            
+        $database=new DbConnect();
+        $this->conexion=$database->connect();
+    }
+
+
+
 function getUsuPass($request){
     $usuarios;
     $response;
