@@ -65,6 +65,6 @@ include 'funciones/alumnos.php';
 include 'funciones/17091072_CRUD.php';
 include 'funciones/17091100_areatriangulo.php';
 include 'funciones/getUsuPass.php'
-
+include 'funciones/login.php'
 $app->run();
 
