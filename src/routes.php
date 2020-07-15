@@ -54,6 +54,9 @@ $app->group('/api', function () use ($app) {
     $app->get('/areatriangulo','areatriangulo');
 
     
-    $app->get('/login','login');
+    $app->get('/login','getlogin');
+
+    $app->post('/login','login');
+    
 
 });
